@@ -1,0 +1,14 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "Script de puesta a cero y datos de prueba en la DB",
+  "main": "install_db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Javier Ruiz",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^2.2.21"
+  }
+}

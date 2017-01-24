@@ -27,7 +27,8 @@ router.get('/', function(req, res, next) {
     console.log('REQ: ', req.query);
 
     if (name) {
-        filter.$text = { $search: name };
+        //filter.$text = { $search: name };
+        filter.name = new RegExp('^' + req.query.name, "i");
     }
     if (saleOrSeek) {
         if (saleOrSeek==='SALE' || saleOrSeek==='SEEK') {

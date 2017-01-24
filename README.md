@@ -1,5 +1,6 @@
 ##URL BASE:
-http://locahost:3000
+http://locahost
+El puerto depende del fichero `config.js`
 ##SCRIPT DE INICIO DE DB:
 - Está en la carpeta `scripts`.
 - Se utiliza directamente el mongodb driver.
@@ -23,7 +24,7 @@ Acepta los siguientes parámetros:
 ###POST:
 - `/apiv1/users/register`: sign-in, creación de usuarios
 - `/apiv1/users/login` : log in de usuarios creados
-- `/apiv1/users/logout` : log out de usuarios logados
+
 
 ##MÓDULOS RESEÑABLES:
 - `languajes/dictionary.js`: módulo de idiomas.
@@ -37,6 +38,24 @@ Acepta los siguientes parámetros:
     - En esta práctica sólo he experimentado un poco con esto.
 
 ##NOTAS:
-- Montado en cluster para aprovechar el multi-core de CPU
+- Montado en cluster para aprovechar el multi-core de CPU. Sin embargo, no se han añadido funciones de auto-lanzado, por las dificultades que esto añadía en la fase de desarrollo.
+- En el fichero `config.js` están los siguientes parámetros de trabajo:
+    - `port`: puerto de escucha
+    - `db`: base de datos a la que se conecta
+    - `jwt`: parámetros para JWT (secret y expiration)
+    - `loginUrl`: login url que se responde en endpoint `users/register`
+    
+##PUESTA EN FUNCIONAMIENTO:
+- Instalar DB de pruebas con productos y usuario de pruebas (con password sin encriptar):
+    - Ir a la carpeta `scripts`.
+    - Ejecutar `npm istall`, ya que tiene su propio `package.json`
+    - Ejecutar `node install_db.js` para destruir toda la base de datos y crearla con datos de prueba.
+- Instalar el proyecto:
+    - Ir a la carpeta raiz del proyecto.
+    - Ejecutar `npm istall`.
+    - Revisar el fichero `package.json`.
+    - Ejecutar `npm start` para lanzar *nodemon* en el módulo principal.
+    - Si se desea modificar la configuración, ver el módulo `config.js`
+- Se incluye la carpeta `public/images` con dos imágenes de prueba en el repositorio, por facilidad.
 
 

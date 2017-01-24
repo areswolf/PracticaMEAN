@@ -3,7 +3,7 @@
  */
 'use-strict';
 
-//const MongoCliente = require('mongodb');
+const localConfig = require('../config');
 
 console.log('COMENZANDO...');
 
@@ -40,14 +40,14 @@ var insertDocuments = function(db, callback) {
                 name: "Bicicleta roja",
                 saleOrSeek: "SALE",
                 price: 230.15,
-                picture: "bici.jpg",
+                picture: localConfig.baseEndPoint + ':' + localConfig.port + '/' + localConfig.productPublicimageResource + '/' + "bicicleta.jpg",
                 tags: [ "lifestyle", "motor"]
             },
             {
                 name: "Patin",
                 saleOrSeek: "SEEK",
                 price: 80.20,
-                picture: "patin.jpg",
+                picture: localConfig.baseEndPoint + ':' + localConfig.port + '/' + localConfig.productPublicimageResource + '/' +  "monopatin.jpg",
                 tags: [ "lifestyle"]
             }
         ], function(err, result) {

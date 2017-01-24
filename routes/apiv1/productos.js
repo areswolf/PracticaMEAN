@@ -6,7 +6,10 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Producto = mongoose.model('Producto');
+const jwtAuth = require('../../middleware/jwtAuth');
 
+
+router.use(jwtAuth());
 
 router.get('/', function(req, res, next) {
     const name = req.query.name;

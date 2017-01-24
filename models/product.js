@@ -2,7 +2,6 @@
  * Created by Javier on 11/01/2017.
  */
 const mongoose = require('mongoose');
-
 const cathegories = ['work', 'lifestyle', 'motor', 'mobile'];
 
 const ProductSchema = mongoose.Schema({

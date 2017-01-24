@@ -20,22 +20,20 @@ MongoClient.connect(url, function(err, db) {
     dropDB(db);
     //  Ahora la creamos de nuevo
     insertDocuments(db, function() {
-
+        console.log('FIN Productos insertados...');
+    });
+    insertUsers(db, function() {
         // Cerramos conexión
         db.close();
         console.log('FIN...');
         process.exit(1);
     });
 
-
 });
 
 var insertDocuments = function(db, callback) {
     // Obtenemos la colección
     var collection = db.collection('Producto');
-    // Insert some documents
-    // Y creamos indice
-    //collection.ensureIndex({name: "text"});
     createTextIndex(db, function() {
         collection.insertMany([
             {
@@ -56,16 +54,34 @@ var insertDocuments = function(db, callback) {
             assert.equal(err, null);
             assert.equal(2, result.result.n);
             assert.equal(2, result.ops.length);
-            console.log("Insertados elementos");
+            console.log("Insertados productos");
             callback(result);
         });
+    });
+};
+
+var insertUsers = function(db, callback) {
+    // Obtenemos la colección
+    var collection = db.collection('User');
+    createTextIndexUser(db, function() {
+        collection.insertMany([
+            {
+                username: "Javier Ruiz",
+                email: "jruiz@spartan-sys.com",
+                password: "1234",
+            }], function(err, result) {
+                assert.equal(err, null);
+                assert.equal(1, result.result.n);
+                assert.equal(1, result.ops.length);
+                console.log("Insertado usuario");
+                callback(result);
+            });
     });
 };
 
 var dropDB = function(db) {
     db.dropDatabase ('Producto');
     console.log("Datos borrados");
-    return;
 };
 
 var createTextIndex = function(db, callback) {
@@ -74,6 +90,17 @@ var createTextIndex = function(db, callback) {
     // Create the index
     collection.createIndex(
         { name : "text" }, function(err, result) {
+            console.log(result);
+            callback(result);
+        });
+};
+
+var createTextIndexUser = function(db, callback) {
+    // Get the restaurants collection
+    var collection = db.collection('User');
+    // Create the index
+    collection.createIndex(
+        { name : "emailtext" }, function(err, result) {
             console.log(result);
             callback(result);
         });

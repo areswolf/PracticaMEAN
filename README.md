@@ -21,9 +21,9 @@ Acepta los siguientes parámetros:
     
 - `/apiv1/tags`: lista total de tags. No se limita en PRO, pues siempre será un número pequeño.
 ###POST:
-- `/apiv1/usuarios/register`: sign-in, creación de usuarios
-- `/apiv1/usuarios/login` : log in de usuarios creados
-- `/apiv1/usuarios/logout` : log out de usuarios logados
+- `/apiv1/users/register`: sign-in, creación de usuarios
+- `/apiv1/users/login` : log in de usuarios creados
+- `/apiv1/users/logout` : log out de usuarios logados
 
 ##MÓDULOS RESEÑABLES:
 - `languajes/dictionary.js`: módulo de idiomas.
@@ -35,5 +35,8 @@ Acepta los siguientes parámetros:
     - Crear una modúlo js para la prueba: `test_1.js`
     - Ejecutar el test: `mocha test_1.js`
     - En esta práctica sólo he experimentado un poco con esto.
-     
+
+##NOTAS:
+- Montado en cluster para aprovechar el multi-core de CPU
+
 

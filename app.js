@@ -4,13 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
 require('./middleware/connectMongoose');
+require('./models/user');
+
 require('./models/product');
 
 // view engine setup
@@ -28,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index'));
 app.use('/apiv1/productos', require('./routes/apiv1/productos'));
 app.use('/apiv1/tags', require('./routes/apiv1/tags'));
+app.use('/apiv1/users', require('./routes/apiv1/users'));
 
 
 // catch 404 and forward to error handler

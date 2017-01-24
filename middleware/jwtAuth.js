@@ -6,7 +6,7 @@ const localConfig = require('../config');
 //  Middleware de autenticación
 module.exports = function(){
   return function (req, res, next) {
-      const token = req.headers('x-access-token') || req.body.token || req.query.token;
+      const token = req.get('x-access-token') || req.body.token || req.query.token;
 
       if (!token) {
           return next(new Error('Token not provided'));

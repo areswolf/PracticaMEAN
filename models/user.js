@@ -14,19 +14,13 @@ const UserSchema = Schema({
 
 UserSchema.pre('save', function(next, done) {
     let self = this;
-    //console.log('DEBUG: selfself', self);
 
     mongoose.models["User"].findOne({email: self.email}, function(err, user) {
-
         if(err) {
-            //console.log('DEBUG: ERR PRE 1');
             return next(err);
         } else if(user) {
-            //console.log('DEBUG: ERR PRE 2', user);
             self.invalidate("email", "email must be unique");
             return next(new Error("email must be unique"));
-        } else {
-            //console.log('DEBUG: DONE. SELF.ENCRIPTA');
         }
     });
     next();

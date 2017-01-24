@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 const Producto = mongoose.model('Producto');
 const jwtAuth = require('../../middleware/jwtAuth');
 
-
 router.use(jwtAuth());
 
 router.get('/', function(req, res, next) {
@@ -29,36 +28,26 @@ router.get('/', function(req, res, next) {
 
     if (name) {
         filter.$text = { $search: name };
-        console.log('NAME: ', filter.name);
     }
     if (saleOrSeek) {
         if (saleOrSeek==='SALE' || saleOrSeek==='SEEK') {
             filter.saleOrSeek = saleOrSeek;
-            console.log('saleOrSeek: ', filter.saleOrSeek);
         }
-        console.log('saleOrSeek_ERROR: ',saleOrSeek);
     }
     if (tags) {
         filter.tags = tags;
-        console.log('tags: ',filter.tags);
     }
     if (page) {
         skip = page*limit;
-        console.log('page: ',page);
-        console.log('limit: ',limit);
-        console.log('skip: ',skip);
     }
     if (max_price && !min_price) {
         filter.price = { $lt: max_price};
-        console.log('max_price: ', filter.price);
     }
     if (!max_price && min_price) {
         filter.price = { $gt: min_price};
-        console.log('min_price: ', filter.price);
     }
     if (max_price && min_price) {
         filter.price = { $gt: min_price, $lt: max_price};
-        console.log('max_min_price: ', filter.price);
     }
 
     Producto.list(filter, limit, skip, sort, function (err, docs) {

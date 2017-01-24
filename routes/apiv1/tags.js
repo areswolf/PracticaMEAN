@@ -5,12 +5,14 @@
 const express = require('express');
 const router = express.Router();
 const tags = require('../../models/product');
+const jwtAuth = require('../../middleware/jwtAuth');
+
+router.use(jwtAuth());
 
 // recuperar lista de productos
 router.get('/', function(req, res, next) {
     res.json({success: true, data: tags});
 
 });
-
 
 module.exports = router;

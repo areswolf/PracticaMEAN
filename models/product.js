@@ -18,7 +18,7 @@ ProductSchema.statics.list = function(filter, limit, skip, sort, cb) {
     query.skip (skip);
     query.sort (sort);
     query.exec(cb);
-    console.log('FILTRO FINAL: ', filter);
+
 };
 
 const Product = mongoose.model('Producto', ProductSchema, 'Producto');

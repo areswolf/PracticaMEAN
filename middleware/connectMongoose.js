@@ -7,7 +7,7 @@ const configLocal = require('../config');
 mongoose.Promise = global.Promise;
 
 conn.on('error', function(err) {
-  console.log('Error de conexión:', err);
+  console.log("CONNECTION ERROR:", err);
   process.exit(1);
 });
 
@@ -17,5 +17,6 @@ conn.once('open', function() {
 });
 
 mongoose.connect( configLocal.db);
+
 
 

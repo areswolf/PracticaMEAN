@@ -9,23 +9,28 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const localConfig = require('../../config');
 const bcrypt = require('bcrypt-nodejs');
+const message = require('../../languajes/dictionary');
 
 router.post('/login', function (req, res, next) {
     const password = req.body.password;
     const userEmail = req.body.email;
     var user = {};
 
-    console.log('DEBUG---LOGIN---');
+    const header = req.headers;
+
     // Buscamos en la DB al usuario con esas credenciales (email) y comprobamos password: User.find({username: userName}) ...
     if (!password || !userEmail) {
-        return next(new Error('Invalid credentials'));
+        //return next(new Error('Invalid credentials'));
+        return next(new Error(message(header,'INVALID CREDENTIALS')));
     }
     User.findOne({email: req.body.email}, function(err, user) {
         if(err) {
-            return next(new Error('Invalid credentials'));
+            return next(new Error(message(header,'INVALID CREDENTIALS')));
+            //return next(new Error('Invalid credentials'));
         } else {
             if(!user) {
-                return next(new Error('User not found'));
+                return next(new Error(message(header,'USER_NOT_FOUND')));
+                //return next(new Error('User not found'));
             } else {
                 // Comprobamos password
                 if (bcrypt.compareSync(req.body.password, user.password)) {
@@ -37,7 +42,8 @@ router.post('/login', function (req, res, next) {
                     res.json({success: true, token: token, expires: localConfig.jwt.expiresIn});
                 }
                 else {  //  No Ok
-                    return next(new Error('Invalid Credentials'));
+                    return next(new Error(message(header,'INVALID CREDENTIALS')));
+                    //return next(new Error('Invalid Credentials'));
                 }
             }
         }
@@ -47,16 +53,20 @@ router.post('/login', function (req, res, next) {
 
 router.post('/register', function (req, res, next) {
     const usuario = new User(req.body);
+    const header = req.headers;
+
 
     if (!req.body.username || !req.body.password || !req.body.email) {
-        return next(new Error('Invalid credentials'));
+        return next(new Error(message(header,'INVALID CREDENTIALS')));
+        //return next(new Error('Invalid credentials'));
     }
 
     usuario.password = require('../../middleware/hashCrypt')(usuario.password);
 
     usuario.save(function(err) {
         if (err) {
-            return next(new Error('User already exists'));
+            return next(new Error(message(header,'USER ALREADY EXISTS')));
+            //return next(new Error('User already exists'));
         }
         res.json({success: true, urlLogin: localConfig.loginUrl});
     });

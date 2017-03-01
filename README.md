@@ -5,11 +5,11 @@ El puerto depende del fichero `config.js`
 **PRÁCTICA DEVOPS: DESPLIEGUE**   
 API Rest:   
 - El puerto es transparente al usuario, pues lo sirve NGINX en la url que se indica a continuación.   
-- Servido por NGINX en http://ec2-184-72-204-95.compute-1.amazonaws.com   
+- Servido por NGINX en **practicadevops.areswolf.com/node-kc** como url base.   
 - Redirigido por NGINX al puerto 3000.   
 - Token válido de ejemplo (para prueba rápida): eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGIxNWNmMTVlNzE3MzM2ZjUxMDU5N2QiLCJpYXQiOjE0ODgwMTg3MTMsImV4cCI6MTQ4ODE5MTUxM30.RWQD7WJpJEupZ68ZVW3hq3Qj_jjH4jXePQd7wL8VCLA   
 Archivo estático:    
-- http://ec2-184-72-204-95.compute-1.amazonaws.com/stylesheets/style.css   
+- http://practicadevops.areswolf.com/node-kc/stylesheets/style.css   
 - Esta url la dirige NGINX al puerto 80   
 - La cabecera es **X-Served-From:areswolf**
 NOTAS:
